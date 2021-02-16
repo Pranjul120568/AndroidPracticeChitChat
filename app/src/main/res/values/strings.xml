@@ -4,4 +4,6 @@
     <string name="waiting_for_sms_to_send">Waiting for SMS to send \n %s Wrong Number?</string>
     <string name="verify_number">Verify %s</string>
     <string name="seconds_remaining">Seconds Remaining: %d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

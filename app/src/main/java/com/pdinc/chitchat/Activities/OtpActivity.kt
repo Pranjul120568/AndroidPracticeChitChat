@@ -1,6 +1,5 @@
-package com.pdinc.chitchat
+package com.pdinc.chitchat.Activities
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,8 +17,8 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.oAuthCredential
 import com.google.firebase.ktx.Firebase
+import com.pdinc.chitchat.R
 import com.pdinc.chitchat.databinding.ActivityOtpBinding
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -71,7 +70,7 @@ class OtpActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 binding.secondsremaintv.isVisible = true
                 binding.secondsremaintv.text =
-                    getString(R.string.seconds_remaining, millisUntilFinished / 1000)
+                    getString(com.pdinc.chitchat.R.string.seconds_remaining, millisUntilFinished / 1000)
             }
             override fun onFinish() {
                 binding.ResendOtp.isEnabled = true
@@ -103,7 +102,7 @@ class OtpActivity : AppCompatActivity() {
         phoneNumber = intent.getStringExtra(phoneno).toString()
         //To enter the phone number just do one thing that extract string resource
         // of text entered and then in value put %s for getting string resource value
-        binding.tvverify.text = getString(R.string.verify_number, phoneNumber)
+        binding.tvverify.text = getString(com.pdinc.chitchat.R.string.verify_number, phoneNumber)
         setSpannableString()
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
@@ -207,10 +206,8 @@ class OtpActivity : AppCompatActivity() {
         binding.messagesenttv.movementMethod = LinkMovementMethod.getInstance()
         binding.messagesenttv.text = span
     }
-
     override fun onBackPressed() {
     }
-
     override fun onStart() {
         super.onStart()
         val currentUser = auth!!.currentUser
