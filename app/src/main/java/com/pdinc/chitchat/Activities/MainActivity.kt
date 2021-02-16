@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         binding.viewPager.adapter= ScreenSlideAdapter(this)
+        val a=10
+        var b=12
     }
 
 
