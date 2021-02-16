@@ -1,5 +1,6 @@
 package com.pdinc.chitchat.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,10 @@ import com.firebase.ui.firestore.paging.LoadingState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.pdinc.chitchat.Activities.ChatActivity
+import com.pdinc.chitchat.Activities.IMAGE
+import com.pdinc.chitchat.Activities.NAME
+import com.pdinc.chitchat.Activities.UID
 import com.pdinc.chitchat.Modals.EmptyViewHolder
 import com.pdinc.chitchat.Modals.User
 import com.pdinc.chitchat.Modals.UserVIewHolder
@@ -63,7 +68,13 @@ class PeopleFragment : Fragment() {
 
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
                 if (holder is UserVIewHolder) {
-                    holder.bind(user = model)
+                    holder.bind(user = model){ name:String, photo:String, id:String ->
+                    val intent=Intent(requireContext(),ChatActivity::class.java)
+                        intent.putExtra(UID,id)
+                        intent.putExtra(NAME,name)
+                        intent.putExtra(IMAGE,photo)
+startActivity(intent)
+                    }
                 }else{
                     
                 }

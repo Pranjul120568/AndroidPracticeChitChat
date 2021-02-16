@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
 
 const val phoneno="phoneNumber"
 class OtpActivity : AppCompatActivity() {
-    lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var mverificationId: String? = null
     private var resendToken: PhoneAuthProvider.ForceResendingToken? = null
     private var auth: FirebaseAuth? = null
@@ -146,14 +146,12 @@ class OtpActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
         // [START verify_with_code]
         val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
         // [END verify_with_code]
         signInWithPhoneAuthCredential(credential)
     }
-
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth!!.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -182,7 +180,6 @@ class OtpActivity : AppCompatActivity() {
                 }
             }
     }
-
     private fun setSpannableString() {
         val span = SpannableString(getString(R.string.waiting_for_sms_to_send, phoneNumber))
         val clickableSpan = object : ClickableSpan() {
@@ -195,7 +192,6 @@ class OtpActivity : AppCompatActivity() {
                     )
                 )
             }
-
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false

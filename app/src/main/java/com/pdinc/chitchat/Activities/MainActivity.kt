@@ -1,7 +1,8 @@
 package com.pdinc.chitchat.Activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.pdinc.chitchat.Adapter.ScreenSlideAdapter
 import com.pdinc.chitchat.databinding.ActivityMainBinding
 
@@ -13,9 +14,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         binding.viewPager.adapter= ScreenSlideAdapter(this)
-        val a=10
-        var b=12
     }
-
-
+    override fun onBackPressed() {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
 }
