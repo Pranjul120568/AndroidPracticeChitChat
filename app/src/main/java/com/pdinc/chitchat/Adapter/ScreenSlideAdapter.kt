@@ -13,5 +13,4 @@ class ScreenSlideAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
         0 -> InboxFragment()
         else -> PeopleFragment()
     }
-
 }

@@ -15,7 +15,6 @@ private fun getCurrentLocale(context: Context): Locale {
         context.resources.configuration.locale
     }
 }
-
 fun Date.isThisWeek(): Boolean {
     val thisCalendar = getInstance()
     val thisWeek = thisCalendar.get(WEEK_OF_YEAR)

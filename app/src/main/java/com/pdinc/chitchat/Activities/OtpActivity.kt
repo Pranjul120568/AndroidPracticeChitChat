@@ -131,7 +131,6 @@ class OtpActivity : AppCompatActivity() {
                 // Show a message and update the UI
                 // ...
             }
-
             override fun onCodeSent(
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken

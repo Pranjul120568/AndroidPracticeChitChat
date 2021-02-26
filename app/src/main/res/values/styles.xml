@@ -13,11 +13,18 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
     </style>
-    <style name="ChatShapeAppearance">
+    <style name="ChatSentShapeAppearance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeBottomLeft">22dp</item>
         <item name="cornerSizeBottomRight">8dp</item>
         <item name="cornerSizeTopRight">22dp</item>
         <item name="cornerSizeTopLeft">22dp</item>
+    </style>
+    <style name="ChatrcvShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomLeft">22dp</item>
+        <item name="cornerSizeBottomRight">22dp</item>
+        <item name="cornerSizeTopRight">22dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
     </style>
 </resources>

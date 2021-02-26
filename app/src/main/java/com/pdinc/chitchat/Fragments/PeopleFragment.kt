@@ -47,7 +47,6 @@ class PeopleFragment : Fragment() {
 //        return super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_blank,container,false)
     }
-
     private fun setUpAdapter() {
         val config =PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -62,10 +61,7 @@ class PeopleFragment : Fragment() {
                 return when(viewType){
                     NORMAL_VIEW_TPE -> UserVIewHolder(layoutInflater.inflate(R.layout.list_item,parent,false))
                     else -> EmptyViewHolder(layoutInflater.inflate(R.layout.empty_view,parent,false))
-                }
-
-            }
-
+                }}
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
                 if (holder is UserVIewHolder) {
                     holder.bind(user = model){ name:String, photo:String, id:String ->
@@ -102,11 +98,8 @@ startActivity(intent)
                     NORMAL_VIEW_TPE
                 }
             }
-
-
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
         val recyclerView= binding.chatrv
