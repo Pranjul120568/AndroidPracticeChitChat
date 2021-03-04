@@ -1,8 +1,6 @@
 package com.pdinc.chitchat.Modals
 
-import android.service.autofill.TextValueSanitizer
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +23,4 @@ class UserVIewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
 onClick.invoke(user.name,user.thumbImage,user.uid)
         }
     }
-
-
 }

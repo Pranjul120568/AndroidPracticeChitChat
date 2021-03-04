@@ -69,8 +69,6 @@ val InboxMap=
             count = 0
     )
 }
-
-
     private fun getMessages(friendsId: String) = db.reference.child("messages/${getId(friendsId)}")
 private fun getInbox(toUser: String,fromUser:String)=db.reference.child("chats/$toUser/$fromUser")
     private fun getId(friendsId: String): String {

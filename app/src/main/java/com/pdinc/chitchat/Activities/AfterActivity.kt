@@ -19,7 +19,7 @@ import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.pdinc.chitchat.Modals.User
 import com.pdinc.chitchat.databinding.ActivityAfterBinding
-
+//this activity is just used to upload user information to the database
 class AfterActivity : AppCompatActivity() {
     private val storage by lazy {
         Firebase.storage
@@ -61,7 +61,6 @@ class AfterActivity : AppCompatActivity() {
             (checkSelfPermission(WRITE_EXTERNAL_STORAGE))==PackageManager.PERMISSION_DENIED){
             val permission= arrayOf(READ_EXTERNAL_STORAGE)
             val permissionwrite= arrayOf(WRITE_EXTERNAL_STORAGE)
-
             requestPermissions(
                 permission,
                 1001
@@ -92,6 +91,7 @@ class AfterActivity : AppCompatActivity() {
             }
         }
     }
+    //uploading image to firebase
     private fun uploadImage(it: Uri) {
 binding.savebtn.isEnabled=false
         val ref=storage.reference.child("uploads/"+auth.uid.toString())

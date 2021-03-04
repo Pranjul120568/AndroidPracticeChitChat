@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,10 +68,9 @@ class PeopleFragment : Fragment() {
                         intent.putExtra(UID,id)
                         intent.putExtra(NAME,name)
                         intent.putExtra(IMAGE,photo)
-startActivity(intent)
+                        startActivity(intent)
                     }
                 }else{
-                    
                 }
             }
             override fun onLoadingStateChanged(state: LoadingState) {
@@ -82,14 +80,13 @@ startActivity(intent)
                     LoadingState.LOADING_MORE -> TODO()
                     LoadingState.LOADED -> TODO()
                     LoadingState.FINISHED -> TODO()
-                    LoadingState.ERROR -> TODO()                //This is used to handle error cases
-
+                    LoadingState.ERROR -> TODO()
+                //This is used to handle error cases
                 }
             }
             override fun onError(e: Exception) {
                 super.onError(e)
             }
-
             override fun getItemViewType(position: Int): Int {
                 val item=getItem(position)?.toObject(User::class.java)
                 return if(auth.uid==item!!.uid){

@@ -102,7 +102,7 @@ class OtpActivity : AppCompatActivity() {
         phoneNumber = intent.getStringExtra(phoneno).toString()
         //To enter the phone number just do one thing that extract string resource
         // of text entered and then in value put %s for getting string resource value
-        binding.tvverify.text = getString(com.pdinc.chitchat.R.string.verify_number, phoneNumber)
+        binding.tvverify.text = getString(R.string.verify_number, phoneNumber)
         setSpannableString()
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
