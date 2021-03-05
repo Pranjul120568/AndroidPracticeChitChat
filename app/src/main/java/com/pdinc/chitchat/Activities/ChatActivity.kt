@@ -20,9 +20,7 @@ class ChatActivity : AppCompatActivity() {
     private val friendsId by lazy { intent.getStringExtra(UID) }
     private val name by lazy { intent.getStringExtra(NAME) }
     private val image by lazy { intent.getStringExtra(IMAGE) }
-    private val mCurrentId by lazy {
-        FirebaseAuth.getInstance().uid
-    }
+    private val mCurrentId by lazy { FirebaseAuth.getInstance().uid }
     lateinit var currentUser: User
     private val db by lazy { FirebaseDatabase.getInstance() }
     private lateinit var binding: ActivityChatBinding
@@ -51,17 +49,15 @@ sendMessage(it.toString())
         }
 
     private fun sendMessage(msg: String) {
-val id=getMessages(friendsId!!).push()  //UniqueKey
+val id=getMessages(friendsId!!).push().key  //UniqueKey
         checkNotNull(id){"Cannot be null"}
         val msgMap=Message(msg,mCurrentId,id)
         getMessages(friendsId!!).child(id.toString()).setValue(msgMap).addOnSuccessListener {
         }
         updateLastMessage(msgMap)
     }
-
     private fun updateLastMessage(message: Message) {
-val InboxMap=
-    Inbox(
+val InboxMap= Inbox(
             message.msg,
             friendsId!!,
             name!!,

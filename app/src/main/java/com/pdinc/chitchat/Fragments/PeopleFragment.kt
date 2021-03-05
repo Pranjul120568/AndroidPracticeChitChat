@@ -35,7 +35,7 @@ val auth by lazy {
 val database by lazy {
     FirebaseFirestore.getInstance().collection("users").orderBy("name", Query.Direction.ASCENDING)
 }
-lateinit var binding: FragmentBlankBinding
+ var binding: FragmentBlankBinding?=null
 class PeopleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,7 +99,7 @@ class PeopleFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)
-        val recyclerView= binding.chatrv
+        val recyclerView= binding!!.chatrv
       recyclerView.apply {
           layoutManager=LinearLayoutManager(requireContext())
           adapter= mAdapter

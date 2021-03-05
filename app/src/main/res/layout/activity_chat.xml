@@ -5,6 +5,8 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context=".Activities.ChatActivity">
 
     <com.google.android.material.appbar.MaterialToolbar

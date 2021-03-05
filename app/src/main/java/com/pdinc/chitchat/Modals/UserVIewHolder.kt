@@ -12,10 +12,10 @@ class UserVIewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding:ListItemBinding
 
     fun bind(user: User,onClick:(name:String,photo:String,id:String)->Unit)= with(itemView){
-        findViewById<TextView>(R.id.countTv).isVisible=false
-        findViewById<TextView>(R.id.timeTv).isVisible=false
-        findViewById<TextView>(R.id.titleTv).text=user.name
-        findViewById<TextView>(R.id.titleTv).text=user.status
+        binding.countTv.isVisible=false
+        binding.timeTv.isVisible=false
+        binding.titleTv.text=user.name
+        binding.subTitleTv.text=user.status
         Picasso.get().load(user.thumbImage).placeholder(R.drawable.common_google_signin_btn_icon_dark).error(R.drawable.common_google_signin_btn_icon_dark)
             .into(binding.userImgView)
 

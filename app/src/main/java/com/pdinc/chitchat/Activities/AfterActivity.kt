@@ -41,21 +41,29 @@ class AfterActivity : AppCompatActivity() {
         }
         binding.savebtn.setOnClickListener {
             val name=binding.nameedt.text.toString()
-            if(name.isNotEmpty()){
-                Toast.makeText(this,"Name not provided!",Toast.LENGTH_SHORT).show()
-            }
-            else if(!::downloadUri.isInitialized){
+            if(!::downloadUri.isInitialized){
                 Toast.makeText(this,"Image not provided!",Toast.LENGTH_SHORT).show()
+            }
+            else if(name.isEmpty()){
+                Toast.makeText(this,"Name not provided!",Toast.LENGTH_SHORT).show()
             }
             else{
                 val user= User(name,downloadUri,downloadUri,auth.uid!!)
                 database.collection("users").document(auth.uid!!).set(user).addOnSuccessListener{
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
+                }.addOnFailureListener {
+                    binding.savebtn.isEnabled=true
+                    Log.d("NOT DONE","USERS NOT CREATED")
                 }
             }
         }
     }
+
+    override fun onBackPressed() {
+
+    }
+
     private fun checkPermissionForImage() {
         if(checkSelfPermission(READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED &&
             (checkSelfPermission(WRITE_EXTERNAL_STORAGE))==PackageManager.PERMISSION_DENIED){
@@ -92,12 +100,12 @@ class AfterActivity : AppCompatActivity() {
         }
     }
     //uploading image to firebase
-    private fun uploadImage(it: Uri) {
+    private fun uploadImage(filePath: Uri) {
 binding.savebtn.isEnabled=false
         val ref=storage.reference.child("uploads/"+auth.uid.toString())
-        val uploadtask=ref.putFile(it)
+        val uploadtask=ref.putFile(filePath)
         uploadtask.continueWithTask(Continuation<UploadTask.TaskSnapshot,Task<Uri>> { task ->
-            if(task.isSuccessful){
+            if(!task.isSuccessful){
                 task.exception.let {
                     throw it!!
                 }
@@ -108,7 +116,37 @@ binding.savebtn.isEnabled=false
             if(task.isSuccessful){
                 downloadUri=task.result.toString()
                 Log.i("URL","downloadurl: $downloadUri")
+            }else{
+                binding.savebtn.isEnabled=true
             }
+        }.addOnFailureListener {
+            Log.d("TAG","NOT SUCCESS")
         }
     }
 }
+//
+//private fun startUpload(filePath: Uri) {
+//    nextBtn.isEnabled = false
+//    val ref = storage.reference.child("uploads/" + auth.uid.toString())
+//    val uploadTask = ref.putFile(filePath)
+//    uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+//        if (!task.isSuccessful) {
+//            task.exception?.let {
+//                throw it
+//            }
+//        }
+//        return@Continuation ref.downloadUrl
+//    }).addOnCompleteListener { task ->
+//        if (task.isSuccessful) {
+//            downloadUrl = task.result.toString()
+//            nextBtn.isEnabled = true
+//        } else {
+//            nextBtn.isEnabled = true
+//            // Handle failures
+//        }
+//    }.addOnFailureListener {
+//
+//    }
+//}
+//
+//}

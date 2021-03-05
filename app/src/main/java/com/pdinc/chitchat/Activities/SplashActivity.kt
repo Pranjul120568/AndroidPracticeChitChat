@@ -9,6 +9,8 @@ class SplashActivity : AppCompatActivity() {
     val auth by lazy {
         FirebaseAuth.getInstance()
     }
+    //In this activity for making the splash which comes when we start to use any
+    // app we use a theme which is originally started by manifest file we can check that out by going to manifest file
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if(auth.currentUser==null){

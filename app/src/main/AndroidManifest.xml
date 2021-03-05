@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChitChat">
-        <activity android:name=".Activities.ChatActivity"></activity>
+        <activity android:name=".Activities.ChatActivity">
+
+        </activity>
         <activity
             android:name=".Activities.SplashActivity"
             android:theme="@style/splashTheme">
@@ -24,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.AfterActivity" />
-        <activity android:name=".OtpActivity" />
+        <activity android:name=".Activities.OtpActivity" />
         <activity android:name=".Activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
