@@ -1,5 +1,7 @@
 package com.pdinc.chitchat.Activities
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
@@ -73,6 +75,17 @@ return if(friendsId>mCurrentId.toString()){
 }
         else{
 friendsId+mCurrentId
+        }
+    }
+    companion object {
+
+        fun createChatActivity(context: Context, id: String, name: String, image: String): Intent {
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra(UID, id)
+            intent.putExtra(NAME, name)
+            intent.putExtra(IMAGE, image)
+
+            return intent
         }
     }
 }
