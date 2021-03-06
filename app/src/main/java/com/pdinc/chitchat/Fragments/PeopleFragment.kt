@@ -49,110 +49,92 @@ class PeopleFragment : Fragment() {
         return layoutInflater.inflate(R.layout.fragment_blank,container,false)
     }
     private fun setUpAdapter() {
-        val config =PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            //No. of contents want to fetch
-            .setPageSize(10)
-            //No. of pages want to get
-            .setPrefetchDistance(2).build()
-        val options=FirestorePagingOptions.Builder<User>().setLifecycleOwner(this)
-            .setQuery(database,config,User::class.java).build()
-mAdapter=object :FirestorePagingAdapter<User,RecyclerView.ViewHolder>(options){
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-return when(viewType){
-    NORMAL_VIEW_TPE -> UserVIewHolder(layoutInflater.inflate(R.layout.list_item,parent,false))
-    else -> EmptyViewHolder(layoutInflater.inflate(R.layout.list_item,parent,false))
-}}
-override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
-if (holder is UserVIewHolder) {
-    if (auth.uid == model.uid) {
-        currentList?.snapshot()?.removeAt(position)
-        notifyItemRemoved(position)
-    }
-    holder.bind(model){ name:String, photo:String, id:String ->
-    val intent=Intent(requireContext(),ChatActivity::class.java)
-        intent.putExtra(UID,id)
-        intent.putExtra(NAME,name)
-        intent.putExtra(IMAGE,photo)
-        startActivity(intent)
-    }
-}else{
-}
-}
+        val config = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                //No. of contents want to fetch
+                .setPageSize(10)
+                //No. of pages want to get
+                .setPrefetchDistance(2).build()
+        val options = FirestorePagingOptions.Builder<User>().setLifecycleOwner(this)
+                .setQuery(database, config, User::class.java).build()
+        mAdapter = object : FirestorePagingAdapter<User, RecyclerView.ViewHolder>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                return when (viewType) {
+                    NORMAL_VIEW_TPE -> UserVIewHolder(layoutInflater.inflate(R.layout.list_item, parent, false))
+                    else -> EmptyViewHolder(layoutInflater.inflate(R.layout.empty_view, parent, false))
+                }
+            }
 
-override fun onError(e: Exception) {
-super.onError(e)
-Log.e("MainActivity", e.message!!)
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
+                if (holder is UserVIewHolder) {
+                    if (auth.uid == model.uid) {
+                        currentList?.snapshot()?.removeAt(position)
+                        notifyItemRemoved(position)
+                    }
+                    holder.bind(model) { name: String, photo: String, id: String ->
+                        val intent = Intent(requireContext(), ChatActivity::class.java)
+                        intent.putExtra(UID, id)
+                        intent.putExtra(NAME, name)
+                        intent.putExtra(IMAGE, photo)
+                        startActivity(intent)
+                    }
+                } else {
+                }
+            }
 
-}
-override fun getItemViewType(position: Int): Int {
-val item=getItem(position)?.toObject(User::class.java)
-return if(auth.uid==item!!.uid){
-    DELETED_VIEW_TPE
-}else{
-    NORMAL_VIEW_TPE
-}
-}
-override fun onLoadingStateChanged(state: LoadingState) {
-when(state){
-    LoadingState.LOADING_INITIAL -> {
+            override fun onError(e: Exception) {
+                super.onError(e)
+                Log.e("MainActivity", e.message!!)
 
-    }
-    LoadingState.LOADING_MORE -> {
+            }
 
-    }
-    LoadingState.LOADED -> {
+            override fun getItemViewType(position: Int): Int {
+                val item = getItem(position)?.toObject(User::class.java)
+                return if (auth.uid == item!!.uid) {
+                    DELETED_VIEW_TPE
+                } else {
+                    NORMAL_VIEW_TPE
+                }
+            }
 
-    }
-    LoadingState.FINISHED -> {
+            override fun onLoadingStateChanged(state: LoadingState) {
+                when (state) {
+                    LoadingState.LOADING_INITIAL -> {
 
-    }
-    LoadingState.ERROR -> {
-        Toast.makeText(
-                requireContext(),
-                "Error Occurred!",
-                Toast.LENGTH_SHORT
-        ).show()
-    }
-    //This is used to handle error cases
-}
-}
+                    }
+                    LoadingState.LOADING_MORE -> {
 
+                    }
+                    LoadingState.LOADED -> {
 
-}
-}
-override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-super.onViewCreated(view, savedInstanceState)
+                    }
+                    LoadingState.FINISHED -> {
 
-binding.chatrv.apply {
-layoutManager=viewManager
-adapter=mAdapter
-}
+                    }
+                    LoadingState.ERROR -> {
+                        Toast.makeText(
+                                requireContext(),
+                                "Error Occurred!",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    //This is used to handle error cases
+                }
+            }
+        }
+        }
+            override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+                super.onViewCreated(view, savedInstanceState)
 
-val recyclerView= binding.chatrv
-recyclerView.apply {
-layoutManager=viewManager
-adapter= mAdapter
-}
-}
+                binding.chatrv.apply {
+                    layoutManager = viewManager
+                    adapter = mAdapter
+                }
 
+                val recyclerView = binding.chatrv
+                recyclerView.apply {
+                    layoutManager = viewManager
+                    adapter = mAdapter
+                }
+            }
 }
-/*
-*
-*
-* override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
-if (holder is UserVIewHolder) {
-    if (auth.uid == model.uid) {
-        currentList?.snapshot()?.removeAt(position)
-        notifyItemRemoved(position)
-    }
-    holder.bind(model){
-        name:String, photo:String, id:String ->
-    val intent=Intent(requireContext(),ChatActivity::class.java)
-        intent.putExtra(UID,id)
-        intent.putExtra(NAME,name)
-        intent.putExtra(IMAGE,photo)
-        startActivity(intent)
-    }
-}else{
-}*/

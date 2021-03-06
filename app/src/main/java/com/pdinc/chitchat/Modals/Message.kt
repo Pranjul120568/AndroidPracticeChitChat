@@ -17,7 +17,7 @@ data class Message(
 override val sentAt:Date
 ):chatEvent{
     constructor(): this("","","","",1,false,Date())
-    constructor(msg: String, mCurrentId: String?, id: String) : this()
+    constructor(msg: String,senderId: String,msgId: String):this()
 }
 data class DateHeader(
         override val sentAt: Date= Date(), val context:Context
