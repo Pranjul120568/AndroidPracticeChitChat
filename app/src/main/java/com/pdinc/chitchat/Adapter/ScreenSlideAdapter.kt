@@ -9,7 +9,6 @@ import com.pdinc.chitchat.Fragments.PeopleFragment
 // used to make the feature of slide when we slide from chats to people fragment
 class ScreenSlideAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
     override fun getItemCount(): Int = 2
-
     override fun createFragment(position: Int): Fragment=when(position) {
         0 -> InboxFragment()
         else -> PeopleFragment()

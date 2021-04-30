@@ -65,6 +65,7 @@ class AfterActivity : AppCompatActivity() {
     }
 
     private fun checkPermissionForImage() {
+        //A proccess to check for all the permissions wehn we click on the image preview
         if(checkSelfPermission(READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED &&
             (checkSelfPermission(WRITE_EXTERNAL_STORAGE))==PackageManager.PERMISSION_DENIED){
             val permission= arrayOf(READ_EXTERNAL_STORAGE)
@@ -82,6 +83,7 @@ class AfterActivity : AppCompatActivity() {
         }
     }
     private fun pickImageFromGallery() {
+        //this is an intent used to tell to pick the image from the gallery
         val intent=Intent(Intent.ACTION_PICK)
         intent.type="image/*"
         startActivityForResult(
@@ -90,6 +92,7 @@ class AfterActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        //here we check wether both the permissions has been granted or not
         if(resultCode==Activity.RESULT_OK && requestCode==1000){
             data?.data.let {
                 binding.profileimage.setImageURI(it)
@@ -102,6 +105,8 @@ class AfterActivity : AppCompatActivity() {
     //uploading image to firebase
     private fun uploadImage(filePath: Uri) {
 binding.savebtn.isEnabled=false
+        //here we make a reference for storage and after child we create a folder of uploads and then we use authentication id as an
+        //id for the image to get uploaded
         val ref=storage.reference.child("uploads/"+auth.uid.toString())
         val uploadtask=ref.putFile(filePath)
         uploadtask.continueWithTask(Continuation<UploadTask.TaskSnapshot,Task<Uri>> { task ->

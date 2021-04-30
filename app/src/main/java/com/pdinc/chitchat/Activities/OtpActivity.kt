@@ -181,14 +181,11 @@ class OtpActivity : AppCompatActivity() {
     }
     private fun setSpannableString() {
         val span = SpannableString(getString(R.string.waiting_for_sms_to_send, phoneNumber))
-        val clickableSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
+        val clickableSpan = object : ClickableSpan(){
+            override fun onClick(widget: View){
                 //Used to handle the clicks on the span
-                startActivity(
-                    Intent(this@OtpActivity, Login::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK
-                                or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    )
+                //this flag helps us to not to move back from the activity which we migrated to by clicking spannable string
+                startActivity(Intent(this@OtpActivity, Login::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 )
             }
             override fun updateDrawState(ds: TextPaint) {
@@ -202,6 +199,7 @@ class OtpActivity : AppCompatActivity() {
         binding.messagesenttv.text = span
     }
     override fun onBackPressed() {
+
     }
     override fun onStart() {
         super.onStart()

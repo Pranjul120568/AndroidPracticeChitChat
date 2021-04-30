@@ -16,14 +16,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         binding.viewPager.adapter= ScreenSlideAdapter(this)
-        TabLayoutMediator.TabConfigurationStrategy{tab:TabLayout.Tab,pos:Int ->
-            when(pos){
-                0 -> tab.text="CHATS"
-                1 -> tab.text="PEOPLE"
+        //this helps in sliding of the tab
+        TabLayoutMediator(binding.tabs,binding.viewPager
+        ) { tab: TabLayout.Tab, pos: Int ->
+            when (pos) {
+                0 -> tab.text = "CHATS"
+                1 -> tab.text = "PEOPLE"
             }
-        }
+        }.attach()
     }
-
     override fun onBackPressed() {
         val intent = Intent(Intent.ACTION_MAIN)
         intent.addCategory(Intent.CATEGORY_HOME)

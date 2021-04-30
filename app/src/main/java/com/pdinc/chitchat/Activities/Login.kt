@@ -30,7 +30,6 @@ class Login : AppCompatActivity() {
         phoneNumber = countryCode + binding.phonenoet.text.toString()
         confirmPhoneNumber()
     }
-
     private fun confirmPhoneNumber() {
         MaterialAlertDialogBuilder(this).apply {
             setMessage("Please confirm your Phone Number $phoneNumber\n"
@@ -46,7 +45,6 @@ class Login : AppCompatActivity() {
             show()
         }
     }
-
     private fun showOtpActivity() {
         startActivity(Intent(this, OtpActivity::class.java).putExtra(phoneno, phoneNumber))
         finish()

@@ -92,9 +92,7 @@ getInbox(friendsId!!,mCurrentId!!).addListenerForSingleValueEvent(object :ValueE
         getInbox(friendsId!!,mCurrentId!!)
     }
     override fun onCancelled(error: DatabaseError) {
-
     }
-
 })
          }
 }
@@ -112,13 +110,11 @@ friendsId+mCurrentId
         }
     }
     companion object {
-
         fun createChatActivity(context: Context, id: String, name: String, image: String): Intent {
             val intent = Intent(context, ChatActivity::class.java)
             intent.putExtra(UID, id)
             intent.putExtra(NAME, name)
             intent.putExtra(IMAGE, image)
-
             return intent
         }
     }

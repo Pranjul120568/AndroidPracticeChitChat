@@ -14,16 +14,14 @@ class UserVIewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             with(itemView) {
                 binding.countTv.isVisible = false
                 binding.timeTv.isVisible = false
-
                 binding.titleTv.text = user.name
                 binding.subTitleTv.text = user.status
-                Picasso.get()
-                        .load(user.thumbImage)
+                Picasso.get().load(user.imageUrl)
                         .placeholder(R.drawable.common_google_signin_btn_icon_dark_focused)
                         .error(R.drawable.common_google_signin_btn_icon_dark_focused)
                         .into(binding.userImgView)
                 setOnClickListener {
-                    onClick.invoke(user.name, user.thumbImage, user.uid)
+                    onClick.invoke(user.name, user.imageUrl, user.uid)
                 }
             }
 }
