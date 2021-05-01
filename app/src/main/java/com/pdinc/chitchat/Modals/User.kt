@@ -1,6 +1,8 @@
 package com.pdinc.chitchat.Modals
 
-import com.google.firebase.firestore.FieldValue
+
+
+
 
 data class User(
     val name:String, val imageUrl:String, val thumbImage:String,

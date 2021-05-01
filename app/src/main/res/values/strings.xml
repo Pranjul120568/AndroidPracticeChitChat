@@ -16,4 +16,5 @@
     <string name="saturday">Saturday</string>
     <string name="like_message">Like message</string>
     <string name="sunday">Sunday</string>
+    <string name="local_host">192.168.31.243</string>
 </resources>

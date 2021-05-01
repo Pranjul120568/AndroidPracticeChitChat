@@ -20,6 +20,7 @@ import com.google.firebase.storage.ktx.storage
 import com.pdinc.chitchat.Modals.User
 import com.pdinc.chitchat.databinding.ActivityAfterBinding
 //this activity is just used to upload user information to the database
+const val EMULATORS_ENABLED = false
 class AfterActivity : AppCompatActivity() {
     private val storage by lazy {
         Firebase.storage
