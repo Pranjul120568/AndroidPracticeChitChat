@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.pdinc.chitchat.R
-import com.pdinc.chitchat.databinding.ListItemBinding
 import com.squareup.picasso.Picasso
 
 

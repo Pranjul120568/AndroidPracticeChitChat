@@ -22,6 +22,8 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
+        
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/userImgView"
             android:layout_width="40dp"
@@ -52,7 +54,6 @@
         android:layout_height="match_parent"
         android:layout_above="@id/inputBox"
         android:layout_below="@+id/toolbar">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/msgRv"
@@ -104,6 +105,7 @@
                     android:layout_toEndOf="@id/smileBtn"
                     android:background="@android:color/white"
                     android:gravity="top|start"
+                    android:textColor="@color/black"
                     android:hint="Type your message"
                     android:imeOptions="actionGo"
                     android:inputType="textMultiLine|textCapSentences|textLongMessage|text"
@@ -117,7 +119,6 @@
                     android:textSize="14sp" />
 
             </RelativeLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
         <ImageView

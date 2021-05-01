@@ -14,10 +14,10 @@ data class Message(
         val type:String="TEXT",
         val status:Int=1,
         val liked:Boolean=false,
-override val sentAt:Date
+        override val sentAt:Date=Date()
 ):chatEvent{
     constructor(): this("","","","",1,false,Date())
-    constructor(msg: String,senderId: String,msgId: String):this()
+  //  constructor(msg: String,senderId: String,msgId: String):this()
 }
 data class DateHeader(
         override val sentAt: Date= Date(), val context:Context

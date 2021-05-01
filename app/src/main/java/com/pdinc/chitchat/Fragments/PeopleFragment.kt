@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.pdinc.chitchat.Activities.*
+import com.pdinc.chitchat.Modals.EmptyViewHolder
 import com.pdinc.chitchat.Modals.User
 import com.pdinc.chitchat.Modals.UserViewHolder
 import com.pdinc.chitchat.R
@@ -25,7 +26,7 @@ private const val TAG = "PeopleFragment"
 private const val DELETED_VIEW_TYPE=1
 private const val NORMAL_VIEW_TPE=2
 class PeopleFragment : Fragment() {
-    private lateinit var mAdapter: FirestorePagingAdapter<User,UserViewHolder>
+    private lateinit var mAdapter: FirestorePagingAdapter<User,RecyclerView.ViewHolder>
     val auth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -59,31 +60,31 @@ class PeopleFragment : Fragment() {
             .setQuery(database, config, User::class.java)
             .build()
         Log.d(TAG, "setupAdapter: ")
-        mAdapter =object :FirestorePagingAdapter<User,UserViewHolder>(options) {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-                Log.d("MAdapter","Work Done")
-                val v=layoutInflater.inflate(R.layout.list_item,parent,false)
-            return UserViewHolder(v)
-//                val inflater = layoutInflater
-//                return when (viewType) {
-//                    NORMAL_VIEW_TPE -> UserVIewHolder(inflater.inflate(R.layout.list_item, parent, false))
-//                    else -> EmptyViewHolder(inflater.inflate(R.layout.empty_view, parent, false))
+        mAdapter =object :FirestorePagingAdapter<User,RecyclerView.ViewHolder>(options) {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                Log.d("MAdapter", "Work Done")
+                val v = layoutInflater.inflate(R.layout.list_item, parent, false)
+                val inflater = layoutInflater
+                return when (viewType) {
+                    NORMAL_VIEW_TPE -> UserViewHolder(inflater.inflate(R.layout.list_item, parent, false))
+                    else -> EmptyViewHolder(inflater.inflate(R.layout.empty_view, parent, false))
                 }
-            override fun onBindViewHolder(holder: UserViewHolder, position: Int, model: User) {
-//                if (holder is UserViewHolder) {
-//                    if (auth.uid == model.uid) {
-//                        currentList?.snapshot()?.removeAt(position)
-//                        notifyItemRemoved(position)
-//                    }
-                    holder.bind(user=model) { name: String, photo: String, id: String ->
+            }
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
+                if (holder is UserViewHolder) {
+                    if (auth.uid == model.uid) {
+                        currentList?.snapshot()?.removeAt(position)
+                        notifyItemRemoved(position)
+                    }
+                    holder.bind(user = model) { name: String, photo: String, id: String ->
                         val intent = Intent(requireContext(), ChatActivity::class.java)
                         intent.putExtra(UID, id)
                         intent.putExtra(NAME, name)
                         intent.putExtra(IMAGE, photo)
                         startActivity(intent)
                     }
-//                } else {
-//                }
+                } else {
+                }
             }
             override fun getItemViewType(position: Int): Int {
                 val item = getItem(position)?.toObject(User::class.java)
