@@ -24,7 +24,6 @@ class Login : AppCompatActivity() {
             checkNumber()
         }
     }
-
     private fun checkNumber() {
         countryCode = binding.ccpicker.selectedCountryCodeWithPlus
         phoneNumber = countryCode + binding.phonenoet.text.toString()

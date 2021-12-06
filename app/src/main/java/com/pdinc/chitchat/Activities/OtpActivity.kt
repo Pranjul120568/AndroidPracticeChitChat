@@ -121,7 +121,7 @@ class OtpActivity : AppCompatActivity() {
             override fun onVerificationFailed(e: FirebaseException) {
                 // This callback is invoked in an invalid request for verification is made,
                 // for instance if the the phone number format is not valid.
-                if (e is FirebaseAuthInvalidCredentialsException) {
+                if (e is FirebaseAuthInvalidCredentialsException){
                     // Invalid request
                     // ...
                 } else if (e is FirebaseTooManyRequestsException) {
@@ -139,6 +139,7 @@ class OtpActivity : AppCompatActivity() {
                 // now need to ask the user to enter the code and then construct a credential
                 // by combining the code with a verification ID.
                 // Save verification ID and resending token so we can use them later
+                Log.d("OnCodeSent","Done")
                 mverificationId = verificationId
                 resendToken = token
                 // ...
@@ -157,11 +158,10 @@ class OtpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Login Success", "signInWithCredential:success")
-
                     val user = task.result?.user
                     startActivity(Intent(this, AfterActivity::class.java))
                     // [START_EXCLUDE]
-                    // updateUI(STATE_SIGNIN_SUCCESS, user)
+                    // updateUI(STATE_SIGN_IN_SUCCESS, user)
                     // [END_EXCLUDE]
                 } else {
                     // Sign in failed, display a message and update the UI
@@ -174,7 +174,7 @@ class OtpActivity : AppCompatActivity() {
                     }
                     // [START_EXCLUDE silent]
                     // Update UI
-                    // updateUI(STATE_SIGNIN_FAILED)
+                    // updateUI(STATE_SIGN_IN_FAILED)
                     // [END_EXCLUDE]
                 }
             }
@@ -185,7 +185,8 @@ class OtpActivity : AppCompatActivity() {
             override fun onClick(widget: View){
                 //Used to handle the clicks on the span
                 //this flag helps us to not to move back from the activity which we migrated to by clicking spannable string
-                startActivity(Intent(this@OtpActivity, Login::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(Intent(this@OtpActivity, Login::class.java).
+                setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 )
             }
             override fun updateDrawState(ds: TextPaint) {

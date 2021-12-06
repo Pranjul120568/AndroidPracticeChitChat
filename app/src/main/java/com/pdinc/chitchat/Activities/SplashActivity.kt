@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 
-
 class SplashActivity : AppCompatActivity() {
-    val auth by lazy {
+    private val auth by lazy {
         FirebaseAuth.getInstance()
     }
     //In this activity for making the splash which comes when we start to use any
@@ -16,8 +15,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         if(auth.currentUser==null){
             startActivity(Intent(this, Login::class.java))
-        }
-        else{
+        }else{
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
