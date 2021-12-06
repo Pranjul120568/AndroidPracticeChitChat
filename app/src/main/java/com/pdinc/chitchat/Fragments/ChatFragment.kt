@@ -17,10 +17,8 @@ import com.pdinc.chitchat.Modals.ChatViewHolder
 import com.pdinc.chitchat.Modals.Inbox
 import com.pdinc.chitchat.R
 
-
 class ChatsFragment : Fragment() {
     lateinit var cc: RecyclerView;
-
     private lateinit var mAdapter: FirebaseRecyclerAdapter<Inbox, ChatViewHolder>
     private lateinit var viewManager: RecyclerView.LayoutManager
     private val mDatabase by lazy {
@@ -29,7 +27,6 @@ class ChatsFragment : Fragment() {
     private val auth by lazy {
         FirebaseAuth.getInstance()
     }
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -68,7 +65,6 @@ class ChatsFragment : Fragment() {
             }
         }
     }
-
     override fun onStart() {
         super.onStart()
         mAdapter.startListening()

@@ -19,6 +19,16 @@ import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.pdinc.chitchat.Modals.User
 import com.pdinc.chitchat.databinding.ActivityAfterBinding
+import com.google.firebase.database.DatabaseError
+
+import com.google.firebase.database.DataSnapshot
+
+import com.google.firebase.database.ValueEventListener
+
+import com.google.firebase.database.FirebaseDatabase
+import java.sql.Types.NULL
+
+
 //this activity is just used to upload user information to the database
 const val EMULATORS_ENABLED = false
 class AfterActivity : AppCompatActivity() {
@@ -34,39 +44,52 @@ class AfterActivity : AppCompatActivity() {
     private lateinit var downloadUri:String
     private lateinit var binding: ActivityAfterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding= ActivityAfterBinding.inflate(layoutInflater)
+        binding = ActivityAfterBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        if (isLoggedIn()) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }else{
         binding.profileimage.setOnClickListener {
             checkPermissionForImage()
         }
         binding.savebtn.setOnClickListener {
-            val name=binding.nameedt.text.toString()
-            if(!::downloadUri.isInitialized){
-                Toast.makeText(this,"Image not provided!",Toast.LENGTH_SHORT).show()
-            }
-            else if(name.isEmpty()){
-                Toast.makeText(this,"Name not provided!",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                val user= User(name,downloadUri,downloadUri,auth.uid!!)
-                database.collection("users").document(auth.uid!!).set(user).addOnSuccessListener{
+            val name = binding.nameedt.text.toString()
+            if (!::downloadUri.isInitialized) {
+                Toast.makeText(this, "Image not provided!", Toast.LENGTH_SHORT).show()
+            } else if (name.isEmpty()) {
+                Toast.makeText(this, "Name not provided!", Toast.LENGTH_SHORT).show()
+            } else {
+                val user = User(name, downloadUri, downloadUri, auth.uid!!)
+                database.collection("users").document(auth.uid!!).set(user).addOnSuccessListener {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }.addOnFailureListener {
-                    binding.savebtn.isEnabled=true
-                    Log.d("NOT DONE","USERS NOT CREATED")
+                    binding.savebtn.isEnabled = true
+                    Log.d("NOT DONE", "USERS NOT CREATED")
                 }
             }
         }
+    }
     }
 
     override fun onBackPressed() {
 
     }
+    private fun isLoggedIn():Boolean{
+        val userRef = FirebaseFirestore.getInstance().collection("users")
+        val doesExist=userRef.whereEqualTo("uid","${auth.uid}")
+        var hasLoggedInPreviously:Boolean=false
+        val doesExistSnapshot=doesExist.get()
 
+        Log.d("User id is","${auth.uid}")
+        if(doesExistSnapshot.result?.isEmpty == false){
+          hasLoggedInPreviously=true
+        }
+       return hasLoggedInPreviously
+    }
     private fun checkPermissionForImage() {
-        //A proccess to check for all the permissions wehn we click on the image preview
+        //A process to check for all the permissions wehn we click on the image preview
         if(checkSelfPermission(READ_EXTERNAL_STORAGE)==PackageManager.PERMISSION_DENIED &&
             (checkSelfPermission(WRITE_EXTERNAL_STORAGE))==PackageManager.PERMISSION_DENIED){
             val permission= arrayOf(READ_EXTERNAL_STORAGE)
@@ -93,7 +116,7 @@ class AfterActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        //here we check wether both the permissions has been granted or not
+        //here we check whether both the permissions has been granted or not
         if(resultCode==Activity.RESULT_OK && requestCode==1000){
             data?.data.let {
                 binding.profileimage.setImageURI(it)
