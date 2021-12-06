@@ -13,5 +13,9 @@ class ScreenSlideAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
     override fun createFragment(position: Int): Fragment=when(position) {
         0 -> ChatsFragment()
         else -> PeopleFragment()
+
+
+
+
     }
 }
