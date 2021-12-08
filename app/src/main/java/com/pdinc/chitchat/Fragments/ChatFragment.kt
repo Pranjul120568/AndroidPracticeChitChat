@@ -2,9 +2,7 @@ package com.pdinc.chitchat.Fragments
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -73,6 +71,11 @@ class ChatsFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         mAdapter.stopListening()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu1,menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 
