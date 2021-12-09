@@ -1,8 +1,10 @@
 package com.pdinc.chitchat.Fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.pdinc.chitchat.Activities.ChatActivity
+import com.pdinc.chitchat.Activities.SettingsActivity
 import com.pdinc.chitchat.Modals.ChatViewHolder
 import com.pdinc.chitchat.Modals.Inbox
 import com.pdinc.chitchat.R
@@ -75,7 +78,11 @@ class ChatsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu1,menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        val settingsButton:Button= view?.findViewById(R.id.SettingsMenu)!!
+        settingsButton.setOnClickListener{
+            startActivity(Intent(requireContext(),SettingsActivity::class.java))
+        }
+        super.onCreateOptionsMenu(menu, inflater )
     }
 
 

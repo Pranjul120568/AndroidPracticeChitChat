@@ -47,7 +47,7 @@ class ChatActivity : AppCompatActivity() {
         intent.getStringExtra(IMAGE)
     }
     private val mCurrentUid: String by lazy {
-        FirebaseAuth.getInstance().uid!!x
+        FirebaseAuth.getInstance().uid!!
     }
     private val db: FirebaseDatabase by lazy {
         FirebaseDatabase.getInstance()
