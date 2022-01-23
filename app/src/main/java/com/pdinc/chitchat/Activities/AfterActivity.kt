@@ -47,12 +47,12 @@ class AfterActivity : AppCompatActivity() {
         binding = ActivityAfterBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if (isLoggedIn()) {
-            startActivity(Intent(this, MainActivity::class.java))
-        }else{
+//        if (isLoggedIn()) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        }else{
         binding.profileimage.setOnClickListener {
             checkPermissionForImage()
-        }
+       // }
         binding.savebtn.setOnClickListener {
             val name = binding.nameedt.text.toString()
             if (!::downloadUri.isInitialized) {

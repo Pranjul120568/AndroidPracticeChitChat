@@ -12,7 +12,6 @@ import com.squareup.picasso.Picasso
 class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Inbox, onClick: (name: String, imageUrl: String, id: String) -> Unit) =
             with(itemView) {
-                findViewById<TextView>(R.id.countTv).isVisible = item.count >0
                 findViewById<TextView>(R.id.countTv).text=item.count.toString()
                 findViewById<TextView>(R.id.timeTv).text = item.time.formatAsListItem(context)
                 findViewById<TextView>(R.id.titleTv).text = item.name

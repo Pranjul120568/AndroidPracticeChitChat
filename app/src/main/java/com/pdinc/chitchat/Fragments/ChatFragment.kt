@@ -76,15 +76,6 @@ class ChatsFragment : Fragment() {
         mAdapter.stopListening()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu1,menu)
-        val settingsButton:Button= view?.findViewById(R.id.SettingsMenu)!!
-        settingsButton.setOnClickListener{
-            startActivity(Intent(requireContext(),SettingsActivity::class.java))
-        }
-        super.onCreateOptionsMenu(menu, inflater )
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

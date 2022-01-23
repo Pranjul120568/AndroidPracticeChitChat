@@ -244,8 +244,6 @@ class ChatActivity : AppCompatActivity() {
         c.viewTreeObserver
                 .addOnGlobalLayoutListener(keyboardVisibilityHelper.visibilityListener)
     }
-
-
     override fun onPause() {
         super.onPause()
         c.viewTreeObserver

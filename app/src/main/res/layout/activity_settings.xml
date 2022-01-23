@@ -1,108 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.SettingsActivity">
-
-    <EditText
-        android:id="@+id/StatusEt"
-        android:layout_width="250dp"
-        android:inputType="text"
-        android:editable="false"
-        android:layout_height="35dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="461dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="Status"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="441dp" />
-
-    <EditText
-        android:id="@+id/NameTextEt"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
-        android:textSize="15sp"
-        android:text="Name..."
-
-        android:editable="false"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="348dp" />
-    <TextView
-        android:id="@+id/NameTextTv"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
-        android:textSize="15sp"
-        android:text="Name..."
-        android:editable="false"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="348dp" />
-
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/changeDpTab"
-        tools:layout_editor_absoluteX="330dp"
-        tools:layout_editor_absoluteY="348dp"
-        android:background="@drawable/ic_pencil"
-        android:clickable="true"
-        android:icon="@drawable/ic_pencil"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/changeNameTab"
-        tools:layout_editor_absoluteX="330dp"
-        tools:layout_editor_absoluteY="348dp"
-        android:background="@drawable/ic_pencil"
-        android:clickable="true"
-        android:icon="@drawable/ic_pencil"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="35dp"
-        android:id="@+id/changeStatusTab"
-        android:background="@drawable/ic_pencil"
-        android:icon="@drawable/ic_pencil"
-        android:layout_height="35dp"
-        android:clickable="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="330dp"
-        tools:layout_editor_absoluteY="461dp" />
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="35dp"
-        tools:ignore="MissingConstraints">
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/displayPictureIv"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="User Name"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="328dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dpIV"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="56dp"
         android:src="@mipmap/default_profile_pic"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="142dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/nameTv"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="-28dp"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="335dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/dpIV"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:text="name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="77dp" />
+
+    <TextView
+        android:id="@+id/statusTv"
+        android:layout_width="335dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/nameTv"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="77dp" />
+</RelativeLayout>
